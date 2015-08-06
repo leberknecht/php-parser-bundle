@@ -20,7 +20,5 @@
   },
   "autoload": {
     "psr-0": { "leberknecht\\PhpParserBundle": "" }
-  },
-
-  "target-dir": "leberknecht/php-parser-bundle"
+  }
 }

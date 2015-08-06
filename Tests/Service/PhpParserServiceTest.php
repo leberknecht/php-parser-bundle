@@ -13,12 +13,12 @@ class PhpParserServiceTest extends \PHPUnit_Framework_TestCase
         $phpParserService->parseFile($filename);
     }
 
-    public function testParseReturnsParser()
+    public function testParseReturnsObject()
     {
         $phpParserService = new PhpParserService();
         $filename = __DIR__ . '/../Fixtures/SomeClass.php';
         $result = $phpParserService->parseFile($filename);
-        $this->assertTrue(is_array($result));
+        $this->assertTrue(is_object($result));
     }
 
     public function testReadFileFileDoesExistsNotPhp()
@@ -33,7 +33,7 @@ class PhpParserServiceTest extends \PHPUnit_Framework_TestCase
     {
         $phpParserService = new PhpParserService();
         $result = $phpParserService->parseFile(__DIR__ . '/../Fixtures/SomeClass.php');
-        $this->assertTrue(is_array($result));
+        $this->assertTrue(is_object($result));
     }
 
     public function testParserResultIsNodeArray()
@@ -41,7 +41,7 @@ class PhpParserServiceTest extends \PHPUnit_Framework_TestCase
         $phpParserService = new PhpParserService();
         $filename = __DIR__ . '/../Fixtures/SomeClass.php';
         $result = $phpParserService->parseFile($filename);
-        $this->assertInstanceOf('\PhpParser\Node', $result[0]);
+        $this->assertInstanceOf('leberknecht\PhpParserBundle\Entity\ParserReport', $result);
     }
 
     public function testParserResultEntries()
@@ -49,6 +49,14 @@ class PhpParserServiceTest extends \PHPUnit_Framework_TestCase
         $phpParserService = new PhpParserService();
         $filename = __DIR__ . '/../Fixtures/SomeClass.php';
         $result = $phpParserService->parseFile($filename);
-        $this->assertInstanceOf('\PhpParser\Node', $result[0]);
+        $this->assertTrue(count($result->getObjects()) == 1);
+    }
+
+    public function testParserResultObjectName()
+    {
+        $phpParserService = new PhpParserService();
+        $filename = __DIR__ . '/../Fixtures/SomeClass.php';
+        $result = $phpParserService->parseFile($filename)->getObjects();
+        $this->assertEquals('SomeClass', $result[0]->getName());
     }
 }

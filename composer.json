@@ -19,8 +19,7 @@
     "symfony/browser-kit":      "*"
   },
   "autoload": {
-    "psr-0": { "leberknecht\\PhpParserBundle": "" },
-    "files": ["vendor/nikic/php-parser/lib/bootstrap.php"]
+    "psr-0": { "leberknecht\\PhpParserBundle": "" }
   },
 
   "target-dir": "leberknecht/php-parser-bundle"

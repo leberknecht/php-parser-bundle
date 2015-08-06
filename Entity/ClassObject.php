@@ -2,7 +2,6 @@
 
 namespace leberknecht\PhpParserBundle\Entity;
 
-
 class ClassObject
 {
     /**
@@ -11,12 +10,17 @@ class ClassObject
     private $methods = [];
 
     /**
+     * @var ClassProperty[]
+     */
+    private $properties = [];
+
+    /**
      * @var string
      */
     private $name;
 
     /**
-     * @return array
+     * @return ClassMethod[]
      */
     public function getMethods()
     {
@@ -53,5 +57,26 @@ class ClassObject
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return ClassProperty[]
+     */
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+
+    /**
+     * @param ClassProperty[] $properties
+     */
+    public function setProperties($properties)
+    {
+        $this->properties = $properties;
+    }
+
+    public function addProperty(ClassProperty $property)
+    {
+        $this->properties[] = $property;
     }
 }

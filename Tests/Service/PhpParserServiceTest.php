@@ -59,4 +59,22 @@ class PhpParserServiceTest extends \PHPUnit_Framework_TestCase
         $result = $phpParserService->parseFile($filename)->getObjects();
         $this->assertEquals('SomeClass', $result[0]->getName());
     }
+
+    public function testParserResultMethodName()
+    {
+        $phpParserService = new PhpParserService();
+        $filename = __DIR__ . '/../Fixtures/SomeClass.php';
+        $result = $phpParserService->parseFile($filename)->getObjects();
+        $method = $result[0]->getMethods();
+        $this->assertEquals('privateFunction', $method[0]->getName());
+    }
+
+    public function testParserResultPropertyName()
+    {
+        $phpParserService = new PhpParserService();
+        $filename = __DIR__ . '/../Fixtures/SomeClass.php';
+        $result = $phpParserService->parseFile($filename)->getObjects();
+        $property = $result[0]->getProperties();
+        $this->assertEquals('privateMember', $property[0]->getName());
+    }
 }

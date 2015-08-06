@@ -3,15 +3,17 @@
 namespace leberknecht\PhpParserBundle\Service;
 
 use leberknecht\PhpParserBundle\Entity\ParserReport;
-use PhpParser\Node\Stmt;
 use leberknecht\PhpParserBundle\Entity\ClassMethod;
 use leberknecht\PhpParserBundle\Entity\ClassObject;
+use leberknecht\PhpParserBundle\Entity\ClassProperty;
+use PhpParser\Node\Stmt;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class PhpParserService
 {
     const NODE_TYPE_CLASS = 'Stmt_Class';
     const NODE_TYPE_METHOD = 'Stmt_ClassMethod';
+    const NODE_TYPE_PROPERTY = 'Stmt_Property';
 
     /**
      * @var ParserReport | null
@@ -58,9 +60,15 @@ class PhpParserService
                 break;
 
             case self::NODE_TYPE_METHOD:
-                $classMethod = new ClassMethod();
-                $classMethod->setName($node->name);
-                $this->currentObject->addMethod($classMethod);
+                $classProperty = new ClassMethod();
+                $classProperty->setName($node->name);
+                $this->currentObject->addMethod($classProperty);
+                break;
+
+            case self::NODE_TYPE_PROPERTY:
+                $classProperty = new ClassProperty();
+                $classProperty->setName($node->props[0]->name);
+                $this->currentObject->addProperty($classProperty);
                 break;
         }
 

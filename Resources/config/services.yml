@@ -1,0 +1,3 @@
+services:
+    php_parser:
+        class: leberknecht\PhpParserBundle\Service\PhpParserService

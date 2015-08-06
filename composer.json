@@ -1,0 +1,27 @@
+{
+  "name": "leberknecht/php-parser-bundle",
+  "license": "open source",
+  "type": "symfony-bundle",
+  "version": "0.1.0",
+  "require": {
+    "nikic/php-parser":                 "^1.4",
+    "php":                              ">=5.3.2",
+    "symfony/finder":                   ">=2.0.16,~2.0",
+    "symfony/filesystem":               ">=2.0.16,~2.0",
+    "symfony/framework-bundle":         ">=2.0.16,~2.0",
+    "sensio/framework-extra-bundle":    "*",
+    "psr/log":                          "1.0.0"
+  },
+  "require-dev": {
+    "symfony/yaml":             ">=2.0.16,~2.0",
+    "phpunit/phpunit":          "4.5.*@dev",
+    "satooshi/php-coveralls":   "0.7.*@dev",
+    "symfony/browser-kit":      "*"
+  },
+  "autoload": {
+    "psr-0": { "leberknecht\\PhpParserBundle": "" },
+    "files": ["vendor/nikic/php-parser/lib/bootstrap.php"]
+  },
+
+  "target-dir": "leberknecht/php-parser-bundle"
+}
